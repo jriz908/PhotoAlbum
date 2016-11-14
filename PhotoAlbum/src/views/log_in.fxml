@@ -11,17 +11,12 @@
 
 <AnchorPane prefHeight="341.0" prefWidth="407.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65">
    <children>
-      <ImageView fitHeight="71.0" fitWidth="80.0" layoutX="165.0" layoutY="123.0">
-         <image>
-            <Image url="@arrows.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="80.0" layoutY="39.0" text="WELCOME" textFill="#34a2b5">
+      <Label layoutX="80.0" layoutY="20.0" text="WELCOME" textFill="#34a2b5">
          <font>
             <Font name="System Bold Italic" size="51.0" />
          </font>
       </Label>
-      <Label layoutX="50.0" layoutY="226.0" text="Username" textFill="#f21212">
+      <Label layoutX="50.0" layoutY="226.0" text="Username:" textFill="#f21212">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -32,5 +27,10 @@
             <Font size="21.0" />
          </font>
       </Button>
+      <ImageView fitHeight="115.0" fitWidth="113.0" layoutX="157.0" layoutY="104.0">
+         <image>
+            <Image url="@pic.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
