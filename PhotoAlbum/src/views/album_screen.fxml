@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="487.0" prefWidth="553.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65">
+   <children>
+      <Pane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ListView layoutX="31.0" layoutY="63.0" prefHeight="316.0" prefWidth="489.0" />
+            <ButtonBar layoutX="348.0" layoutY="14.0" prefHeight="40.0" prefWidth="165.0">
+              <buttons>
+                <Button mnemonicParsing="false" text="Safe Quit" textFill="#9a0e13">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="135.0" layoutY="18.0" mnemonicParsing="false" text="Log Out" textFill="#1f15e1">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+              </buttons>
+            </ButtonBar>
+            <Button layoutX="47.0" layoutY="22.0" mnemonicParsing="false" text="View/Edit Photo" textFill="#1a8632">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutX="39.0" layoutY="416.0" mnemonicParsing="false" text="Add Photo" textFill="#24861d">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutX="145.0" layoutY="416.0" mnemonicParsing="false" text="Remove Photo" textFill="#dd0b27">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutX="392.0" layoutY="391.0" mnemonicParsing="false" text="Move/Copy Photo" textFill="#5b13e1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutX="400.0" layoutY="441.0" mnemonicParsing="false" text="Start SlideShow" textFill="#14697c">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
