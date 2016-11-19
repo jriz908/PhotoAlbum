@@ -20,12 +20,12 @@
             <TextField alignment="CENTER" editable="false" layoutX="354.0" layoutY="136.0" text="Date Taken" />
             <TextField alignment="CENTER" layoutX="38.0" layoutY="329.0" text="Photo Caption" />
             <TextField alignment="CENTER" layoutX="225.0" layoutY="329.0" text="Photo Tags" />
-            <Button layoutX="52.0" layoutY="389.0" mnemonicParsing="false" text="Edit Photo Info" textFill="#391c9a">
+            <Button layoutX="52.0" layoutY="389.0" mnemonicParsing="false" onAction="#edit" text="Edit Photo Info" textFill="#391c9a">
                <font>
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="404.0" layoutY="389.0" mnemonicParsing="false" text="Return to Album" textFill="#f20a0a">
+            <Button layoutX="404.0" layoutY="389.0" mnemonicParsing="false" onAction="#album" text="Return to Album" textFill="#f20a0a">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

@@ -18,17 +18,17 @@
                </font>
             </Button>
             <ImageView fitHeight="236.0" fitWidth="236.0" layoutX="21.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
-            <Button layoutX="133.0" layoutY="338.0" mnemonicParsing="false" text="Move Photo" textFill="#117779">
+            <Button layoutX="133.0" layoutY="338.0" mnemonicParsing="false" onAction="#move" text="Move Photo" textFill="#117779">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="32.0" layoutY="338.0" mnemonicParsing="false" text="Copy Photo" textFill="#482eda">
+            <Button layoutX="32.0" layoutY="338.0" mnemonicParsing="false" onAction="#copy" text="Copy Photo" textFill="#482eda">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="385.0" layoutY="385.0" mnemonicParsing="false" text="Close" textFill="#fc230f">
+            <Button layoutX="385.0" layoutY="385.0" mnemonicParsing="false" onAction="#close" text="Close" textFill="#fc230f">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

@@ -21,17 +21,17 @@
             <TextField layoutX="400.0" layoutY="85.0" prefHeight="25.0" prefWidth="75.0" promptText="End range" />
             <TextField layoutX="345.0" layoutY="136.0" prefHeight="25.0" prefWidth="97.0" promptText="Search Tag" />
             <TextField alignment="CENTER" layoutX="45.0" layoutY="284.0" promptText="Album Title" />
-            <Button layoutX="359.0" layoutY="194.0" mnemonicParsing="false" text="Search">
+            <Button layoutX="359.0" layoutY="194.0" mnemonicParsing="false" onAction="#search" text="Search">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="63.0" layoutY="337.0" mnemonicParsing="false" text="Create Album" textFill="#087916">
+            <Button layoutX="63.0" layoutY="337.0" mnemonicParsing="false" onAction="#create" text="Create Album" textFill="#087916">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="368.0" layoutY="337.0" mnemonicParsing="false" text="End Search" textFill="#3b2297">
+            <Button layoutX="368.0" layoutY="337.0" mnemonicParsing="false" onAction="#end_search" text="End Search" textFill="#3b2297">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

@@ -17,7 +17,7 @@ public class slideshow_controller {
 		Stage primary = Controller.getStage();
 		stage.initOwner(primary);
 		stage.initModality(Modality.WINDOW_MODAL);
-		stage.setTitle("Search Screen");
+		stage.setTitle("SlideShow");
 		stage.setScene( Controller.getScene() );
 		show_stage ();
 	}
@@ -25,6 +25,25 @@ public class slideshow_controller {
 	public void quit () {
 		next_scene = 0;
 		close_stage();
+	}
+	
+	public void prev () {
+		
+		/**
+		 * insert code here
+		 */
+	}
+	
+	public void next () {
+		
+		/**
+		 * insert code here
+		 */
+	}
+	
+	public void album () {
+		next_scene = 4;
+		stage.close();
 	}
 	
 	public void show_stage () {

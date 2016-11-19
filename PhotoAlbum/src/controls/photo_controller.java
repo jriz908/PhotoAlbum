@@ -17,13 +17,25 @@ public class photo_controller {
 		Stage primary = Controller.getStage();
 		stage.initOwner(primary);
 		stage.initModality(Modality.WINDOW_MODAL);
-		stage.setTitle("Search Screen");
+		stage.setTitle("Photo Screen");
 		stage.setScene( Controller.getScene() );
 		show_stage ();
 	}
 	
 	public void quit () {
 		next_scene = 0;
+		close_stage();
+	}
+	
+	public void edit () {
+		
+		/**
+		 * insert code here
+		 */
+	}
+	
+	public void album () {
+		next_scene = 4;
 		close_stage();
 	}
 	

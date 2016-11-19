@@ -27,6 +27,25 @@ public class search_controller {
 		close_stage();
 	}
 	
+	public void search () {
+		
+		/**
+		 * insert code here
+		 */
+	}
+	
+	public void create () {
+		
+		/**
+		 * insert code here
+		 */
+	}
+	
+	public void end_search () {
+		next_scene = 3;
+		stage.close();
+	}
+	
 	public void show_stage () {
 		stage.showAndWait();
 	}

@@ -16,17 +16,17 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="45.0" layoutY="22.0" mnemonicParsing="false" text="Return to Album" textFill="#f20b26">
+            <Button layoutX="45.0" layoutY="22.0" mnemonicParsing="false" onAction="#album" text="Return to Album" textFill="#f20b26">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="45.0" layoutY="414.0" mnemonicParsing="false" text="Prev Photo" textFill="#112beb">
+            <Button layoutX="45.0" layoutY="414.0" mnemonicParsing="false" onAction="#prev" text="Prev Photo" textFill="#112beb">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="379.0" layoutY="414.0" mnemonicParsing="false" text="Next Photo" textFill="#387c4f">
+            <Button layoutX="379.0" layoutY="414.0" mnemonicParsing="false" onAction="#next" text="Next Photo" textFill="#387c4f">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
