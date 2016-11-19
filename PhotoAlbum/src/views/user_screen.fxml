@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="456.0" prefWidth="527.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65">
+<AnchorPane prefHeight="456.0" prefWidth="527.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.user_controller">
    <children>
       <SplitPane dividerPositions="0.4" prefHeight="456.0" prefWidth="527.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -22,7 +21,7 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Button layoutX="70.0" layoutY="405.0" mnemonicParsing="false" text="Search" textFill="#0c3fe8">
+                  <Button layoutX="70.0" layoutY="405.0" mnemonicParsing="false" onAction="#search" text="Search" textFill="#0c3fe8">
                      <font>
                         <Font name="System Bold Italic" size="12.0" />
                      </font>
@@ -33,12 +32,12 @@
                <children>
                   <ButtonBar layoutX="118.0" layoutY="14.0" prefHeight="40.0" prefWidth="180.0">
                     <buttons>
-                      <Button minWidth="60.0" mnemonicParsing="false" prefHeight="19.0" text="Safe Quit" textFill="#ae0c1c">
+                      <Button minWidth="60.0" mnemonicParsing="false" onAction="#quit" prefHeight="19.0" text="Safe Quit" textFill="#ae0c1c">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
-                        <Button layoutX="135.0" layoutY="18.0" mnemonicParsing="false" text="Log Out" textFill="#402b97">
+                        <Button layoutX="135.0" layoutY="18.0" mnemonicParsing="false" onAction="#log_out" text="Log Out" textFill="#402b97">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -47,24 +46,24 @@
                   </ButtonBar>
                   <ButtonBar layoutX="24.0" layoutY="392.0" prefHeight="40.0" prefWidth="200.0">
                     <buttons>
-                      <Button mnemonicParsing="false" text="Rename">
+                      <Button mnemonicParsing="false" onAction="#rename" text="Rename">
                            <font>
                               <Font name="System Bold Italic" size="12.0" />
                            </font>
                         </Button>
-                        <Button layoutX="135.0" layoutY="18.0" mnemonicParsing="false" text="Delete">
+                        <Button layoutX="135.0" layoutY="18.0" mnemonicParsing="false" onAction="#delete" text="Delete">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
-                        <Button layoutX="50.0" layoutY="18.0" mnemonicParsing="false" text="Open">
+                        <Button layoutX="50.0" layoutY="18.0" mnemonicParsing="false" onAction="#open" text="Open">
                            <font>
                               <Font name="System Bold Italic" size="12.0" />
                            </font>
                         </Button>
                     </buttons>
                   </ButtonBar>
-                  <Button layoutX="118.0" layoutY="286.0" mnemonicParsing="false" text="Create Album" textFill="#136f24">
+                  <Button layoutX="118.0" layoutY="286.0" mnemonicParsing="false" onAction="#create" text="Create Album" textFill="#136f24">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

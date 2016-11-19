@@ -7,12 +7,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="399.0" prefWidth="494.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="399.0" prefWidth="494.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.search_controller">
    <children>
       <Pane prefHeight="464.0" prefWidth="494.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ListView layoutX="25.0" layoutY="31.0" prefHeight="209.0" prefWidth="264.0" />
-            <Button layoutX="403.0" layoutY="19.0" mnemonicParsing="false" text="Safe Quit" textFill="#c91010">
+            <Button layoutX="403.0" layoutY="19.0" mnemonicParsing="false" onAction="#quit" text="Safe Quit" textFill="#c91010">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

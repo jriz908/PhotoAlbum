@@ -6,13 +6,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="464.0" prefWidth="511.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65">
+<AnchorPane prefHeight="464.0" prefWidth="511.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.slideshow_controller">
    <children>
       <Pane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="320.0" fitWidth="406.0" layoutX="52.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true" />
-            <Button layoutX="406.0" layoutY="22.0" mnemonicParsing="false" text="Safe Quit" textFill="#ae1a29">
+            <Button layoutX="406.0" layoutY="22.0" mnemonicParsing="false" onAction="#quit" text="Safe Quit" textFill="#ae1a29">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
