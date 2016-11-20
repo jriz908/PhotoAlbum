@@ -5,10 +5,13 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Album;
 import model.Data;
 import model.User;
 
@@ -67,6 +70,22 @@ public class admin_controller {
 		
 		if(text != null && text.length() > 0){
 			User newUser = new User(text);
+			
+			//check for duplicate
+			for(User u : temp.getUsers()){
+				   if(u.getUsername().equals(text)){
+					   Alert alert = new Alert(AlertType.ERROR);
+					   alert.initOwner(stage);
+					   alert.setTitle("ERROR");
+					   alert.setHeaderText("Duplicate found");
+					   alert.setContentText("Username already exists. Duplicates not allowed.");
+					   
+					   new_username_text.setText("");
+
+					   alert.showAndWait();
+					   return;
+				   }
+			   }
 			
 			
 			temp.getUsers().add(newUser);

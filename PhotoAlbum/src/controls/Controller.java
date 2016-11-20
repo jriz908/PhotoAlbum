@@ -216,6 +216,7 @@ public class Controller {
 		
 		switch (next_scene) {
 		case CLOSE:
+			activeUser_data();
 			System.exit(0);
 			break;
 		case LOGIN:
