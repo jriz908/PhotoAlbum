@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="341.0" prefWidth="407.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.Controller">
+<AnchorPane prefHeight="341.0" prefWidth="407.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.Controller">
    <children>
       <Label layoutX="80.0" layoutY="20.0" text="WELCOME" textFill="#34a2b5">
          <font>
@@ -20,8 +20,8 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="164.0" layoutY="226.0" prefHeight="30.0" prefWidth="163.0" promptText="Enter username" />
-      <Button layoutX="182.0" layoutY="289.0" mnemonicParsing="false" onAction="#user_screen" prefHeight="16.0" prefWidth="78.0" text="Log In" textFill="#11d728">
+      <TextField fx:id="username_text" layoutX="164.0" layoutY="226.0" prefHeight="30.0" prefWidth="163.0" promptText="Enter username" />
+      <Button layoutX="182.0" layoutY="289.0" mnemonicParsing="false" onAction="#login" prefHeight="16.0" prefWidth="78.0" text="Log In" textFill="#11d728">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>

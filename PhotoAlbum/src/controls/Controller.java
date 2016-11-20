@@ -4,8 +4,13 @@ import application.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
+import model.*;
 
 public class Controller {
 	
@@ -24,9 +29,63 @@ public class Controller {
 	private static Scene scene;
 	private static int next_scene = 1;
 	
+	private static Data data;
+	private static User activeUser;
+	
+	//fxml elements
+	@FXML
+	private TextField username_text;
+	
 	@FXML
 	private void initialize () {
+		
+		data = new Data();
+		
 		stage = Main.getStage();
+	}
+	
+	public void login () {
+		
+		String text = username_text.getText().trim();
+		
+		if(text.equals("")){
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(stage);
+			alert.setTitle("Error");
+			alert.setHeaderText("Invaild Username");
+			alert.setContentText("Username field is empty");
+			alert.showAndWait();
+			return;
+		}
+		
+		if (text.equals("admin")) {
+			next_scene = ADMIN;
+		} 
+		
+		for(User u : data.getUsers()){
+			
+			if(u.getUsername().equals(text)){
+				next_scene = USER;
+				activeUser = u;
+			}
+				
+		}
+		
+		if(next_scene == LOGIN){
+			Alert alert = new Alert(AlertType.WARNING);
+	        alert.initOwner(stage);
+	        alert.setTitle("Error");
+	        alert.setHeaderText("Invaild Username");
+	        alert.setContentText("User does not exist");
+	        alert.showAndWait();
+	        return;
+	        
+		}
+		
+		
+		username_text.setText("");
+		
+		next_scene ();
 	}
 	
 	public void user_screen () {
@@ -47,6 +106,26 @@ public class Controller {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	
+	public void admin_screen () {
+		
+		try{
+			FXMLLoader loader = new FXMLLoader ();
+			loader.setLocation(Controller.class.getResource("/views/admin_screen.fxml"));
+			root = (AnchorPane) loader.load();
+			scene = new Scene (root);
+			
+			admin_controller ctrl= (admin_controller) loader.getController();
+			stage.hide();
+			Thread.sleep(100);
+			ctrl.start();
+			next_scene = admin_controller.get_next();
+			next_scene ();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void album_screen () {
@@ -134,6 +213,9 @@ public class Controller {
 		case LOGIN:
 			setStage ();
 			break;
+		case ADMIN:
+			admin_screen ();
+			break;
 		case USER:
 			user_screen ();
 			break;
@@ -190,6 +272,14 @@ public class Controller {
 	
 	public static Scene getScene () {
 		return scene;
+	}
+	
+	public static Data getData(){
+		return data;
+	}
+	
+	public static User getActiveUser(){
+		return activeUser;
 	}
 	
 }

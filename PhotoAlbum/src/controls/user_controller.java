@@ -1,15 +1,39 @@
 package controls;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Album;
+import model.Data;
+import model.User;
 
 public class user_controller {
 	private static Stage stage;
 	private static int next_scene = 0;
 	
+	private ObservableList<Album> albumsList;
+	
+	private Data temp;
+	
+	private User activeUser;
+	
+	@FXML
+	private TextField new_album_text;
+	@FXML
+	private ListView<Album> listview = new ListView<>();
+	
 	@FXML
 	private void initialize () {
+		
+		activeUser = Controller.getActiveUser();
+		
+		albumsList = activeUser.getAlbums();
+		
+		listview.setItems(albumsList);
+		
 		stage = new Stage ();
 	}
 	
@@ -63,9 +87,16 @@ public class user_controller {
 	
 	public void create () {
 		
-		/**
-		 * complete code later
-		 */
+		String text = new_album_text.getText().trim();
+		
+		if(text != null && text.length() > 0){
+			Album newAlbum = new Album(text);
+			
+			activeUser.getAlbums().add(newAlbum);
+			
+			new_album_text.setText("");
+			
+		}
 		
 	}
 	

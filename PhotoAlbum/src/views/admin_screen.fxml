@@ -9,20 +9,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="442.0" prefWidth="519.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65">
+<AnchorPane prefHeight="442.0" prefWidth="519.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.admin_controller">
    <children>
       <SplitPane dividerPositions="0.4" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <ListView layoutX="-5.0" layoutY="63.0" prefHeight="311.0" prefWidth="211.0" />
+                  <ListView fx:id="listview" layoutX="-5.0" layoutY="63.0" prefHeight="311.0" prefWidth="211.0" />
                   <Label layoutX="74.0" layoutY="25.0" text="Users">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Button layoutX="52.0" layoutY="392.0" mnemonicParsing="false" text="Delete User" textFill="#e81515">
+                  <Button layoutX="52.0" layoutY="392.0" mnemonicParsing="false" onAction="#delete" text="Delete User" textFill="#e81515">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -33,24 +32,24 @@
                <children>
                   <ButtonBar layoutX="113.0" layoutY="14.0" prefHeight="40.0" prefWidth="167.0">
                     <buttons>
-                      <Button mnemonicParsing="false" text="Safe Quit" textFill="#a41313">
+                      <Button mnemonicParsing="false" onAction="#quit" text="Safe Quit" textFill="#a41313">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
-                        <Button layoutX="135.0" layoutY="18.0" mnemonicParsing="false" text="Log Out" textFill="#3415d3">
+                        <Button layoutX="135.0" layoutY="18.0" mnemonicParsing="false" onAction="#log_out" text="Log Out" textFill="#3415d3">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
                     </buttons>
                   </ButtonBar>
-                  <Button layoutX="105.0" layoutY="288.0" mnemonicParsing="false" text="Create User" textFill="#239a4f">
+                  <Button layoutX="105.0" layoutY="288.0" mnemonicParsing="false" onAction="#create" text="Create User" textFill="#239a4f">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <TextField alignment="CENTER" layoutX="79.0" layoutY="239.0" promptText="Enter Album name" />
+                  <TextField fx:id="new_username_text" alignment="CENTER" layoutX="79.0" layoutY="239.0" promptText="Enter username" />
                </children>
             </AnchorPane>
         </items>
