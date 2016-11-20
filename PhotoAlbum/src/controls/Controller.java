@@ -1,5 +1,12 @@
 package controls;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.List;
+
 import application.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,8 +16,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import model.*;
+import model.Data;
+import model.User;
 
 public class Controller {
 	
@@ -40,8 +47,8 @@ public class Controller {
 	private void initialize () {
 		
 		data = new Data();
-		
 		stage = Main.getStage();
+		read_in_users();
 	}
 	
 	public void login () {
@@ -122,6 +129,7 @@ public class Controller {
 			Thread.sleep(100);
 			ctrl.start();
 			next_scene = admin_controller.get_next();
+			write_users();
 			next_scene ();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -211,6 +219,7 @@ public class Controller {
 			System.exit(0);
 			break;
 		case LOGIN:
+			activeUser_data();
 			setStage ();
 			break;
 		case ADMIN:
@@ -280,6 +289,74 @@ public class Controller {
 	
 	public static User getActiveUser(){
 		return activeUser;
+	}
+	
+	public void activeUser_data () {
+		
+		if (activeUser == null)
+			return;
+		
+		String u = activeUser.getUsername();
+		
+		if (u == null)
+			return;
+		
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream (new FileOutputStream ("data/" + u));
+			oos.writeObject(activeUser);
+			oos.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void read_in_users () {
+		File folder = new File ("data");
+		File[] files = folder.listFiles();
+		
+		if (files.length < 1)
+			return;
+		
+		for (File f: files) {
+			try {
+				ObjectInputStream ois = new ObjectInputStream (new FileInputStream ("data/"+f.getName()));
+				User u = (User) ois.readObject();
+				data.getUsers().add(u);
+				ois.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+	}
+	
+	public void write_users () {
+		List<User> users_added = admin_controller.get_UsersAdded();
+		List<User> users_deleted = admin_controller.get_UsersDeleted();
+		
+		if (!users_deleted.isEmpty()) {
+			for (User u: users_deleted) {
+				try {
+					File f = new File ("data/"+u.getUsername());
+					f.delete();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		if (!users_added.isEmpty()) {
+			for (User u: users_added) {
+				try {
+					ObjectOutputStream oos = new ObjectOutputStream (new FileOutputStream ("data/" + u.getUsername()));
+					oos.writeObject(u);
+					oos.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 	
 }

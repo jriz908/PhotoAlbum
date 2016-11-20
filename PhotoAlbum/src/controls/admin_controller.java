@@ -1,18 +1,24 @@
 package controls;
 
-import model.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Data;
+import model.User;
 
 public class admin_controller {
 	private static Stage stage;
 	private static int next_scene;
 	
 	private ObservableList<User> usersList;
+	private static List<User> users_added;
+	private static List<User> users_deleted;
 	
 	private Data temp;
 	
@@ -27,10 +33,11 @@ public class admin_controller {
 	private void initialize () {
 		
 		temp = Controller.getData();
-		
 		usersList = temp.getUsers();
-		
 		listview.setItems(usersList);
+		
+		users_added = new ArrayList<User>();
+		users_deleted = new ArrayList<User>();
 		
 		stage = new Stage ();
 	}
@@ -63,12 +70,7 @@ public class admin_controller {
 			
 			
 			temp.getUsers().add(newUser);
-			
-			
-			//for debugging
-			//temp.printUsers();
-			
-			
+			users_added.add(newUser);
 			new_username_text.setText("");
 			
 		}
@@ -83,8 +85,7 @@ public class admin_controller {
 			return;
 		
 		temp.getUsers().remove(userToDelete);
-		
-		//temp.printUsers();
+		users_deleted.add(userToDelete);
 		
 	}
 	
@@ -100,4 +101,13 @@ public class admin_controller {
 	public static int get_next () {
 		return next_scene;
 	}
+	
+	public static List<User> get_UsersAdded () {
+		return users_added;
+	}
+	
+	public static List<User> get_UsersDeleted () {
+		return users_deleted;
+	}
+	
 }

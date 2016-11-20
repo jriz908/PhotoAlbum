@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	private static Stage stage;
 	private AnchorPane root;
+	private Controller ctrl;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -24,13 +25,17 @@ public class Main extends Application {
 			stage.setScene(scene);
 			stage.setTitle("Photo Album");
 			
-			Controller ctrl = (Controller) loader.getController();
+			ctrl = (Controller) loader.getController();
 			ctrl.setStage();
 			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
 	
+	@Override
+	public void stop () {
+		ctrl.activeUser_data();
 	}
 	
 	public static void main(String[] args) {

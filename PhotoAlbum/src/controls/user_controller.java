@@ -1,5 +1,6 @@
 package controls;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -28,13 +29,13 @@ public class user_controller {
 	@FXML
 	private void initialize () {
 		
-		activeUser = Controller.getActiveUser();
+		stage = new Stage ();
 		
-		albumsList = activeUser.getAlbums();
+		activeUser = Controller.getActiveUser();
+
+		albumsList = FXCollections.observableArrayList(activeUser.getAlbums());
 		
 		listview.setItems(albumsList);
-		
-		stage = new Stage ();
 	}
 	
 	public void start () {
@@ -93,7 +94,7 @@ public class user_controller {
 			Album newAlbum = new Album(text);
 			
 			activeUser.getAlbums().add(newAlbum);
-			
+			albumsList.add(newAlbum);
 			new_album_text.setText("");
 			
 		}
