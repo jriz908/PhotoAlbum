@@ -236,6 +236,15 @@ public class user_controller {
 			
 			new_album_text.setText("");
 			
+		}else{
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(stage);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No album name entered.");
+			alert.setContentText("No album name entered.");
+
+			alert.showAndWait();
+			return;
 		}
 		
 	}
