@@ -311,7 +311,7 @@ public class Controller {
 		}
 	}
 	
-	public void read_in_users () {
+	public static void read_in_users () {
 		File folder = new File ("data");
 		File[] files = folder.listFiles();
 		
@@ -332,7 +332,7 @@ public class Controller {
 		
 	}
 	
-	public void write_users () {
+	public static void write_users () {
 		List<User> users_added = admin_controller.get_UsersAdded();
 		List<User> users_deleted = admin_controller.get_UsersDeleted();
 		
