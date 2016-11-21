@@ -303,7 +303,7 @@ public class Controller {
 			return;
 		
 		try {
-			ObjectOutputStream oos = new ObjectOutputStream (new FileOutputStream ("data/" + u));
+			ObjectOutputStream oos = new ObjectOutputStream (new FileOutputStream ("data/" + u+ "/user_info"));
 			oos.writeObject(activeUser);
 			oos.close();
 		} catch (Exception e) {
@@ -320,7 +320,7 @@ public class Controller {
 		
 		for (File f: files) {
 			try {
-				ObjectInputStream ois = new ObjectInputStream (new FileInputStream ("data/"+f.getName()));
+				ObjectInputStream ois = new ObjectInputStream (new FileInputStream ("data/"+f.getName()+"/user_info"));
 				User u = (User) ois.readObject();
 				data.getUsers().add(u);
 				ois.close();
@@ -340,7 +340,7 @@ public class Controller {
 			for (User u: users_deleted) {
 				try {
 					File f = new File ("data/"+u.getUsername());
-					f.delete();
+					deleteDir(f);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -350,7 +350,9 @@ public class Controller {
 		if (!users_added.isEmpty()) {
 			for (User u: users_added) {
 				try {
-					ObjectOutputStream oos = new ObjectOutputStream (new FileOutputStream ("data/" + u.getUsername()));
+					File f = new File ("data/"+u.getUsername());
+					f.mkdir();
+					ObjectOutputStream oos = new ObjectOutputStream (new FileOutputStream (f+"/user_info"));
 					oos.writeObject(u);
 					oos.close();
 				} catch (Exception e) {
@@ -358,6 +360,17 @@ public class Controller {
 				}
 			}
 		}
+	}
+	
+	public static void deleteDir(File dir) {
+	      if (dir.isDirectory()) {
+	         String[] children = dir.list();
+	         for (int i = 0; i < children.length; i++) {
+	            deleteDir(new File(dir, children[i]));
+	         }
+	      }
+	      
+	      dir.delete();
 	}
 	
 }

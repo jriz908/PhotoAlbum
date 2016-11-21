@@ -74,10 +74,23 @@ public class user_controller {
 	}
 	
 	public void open () {
+		
+		if(listview.getSelectionModel().getSelectedItem() == null){
+			
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(stage);
+			alert.setTitle("Error");
+			alert.setHeaderText("Error");
+			alert.setContentText("No album selected");
+			alert.showAndWait();
+			
+			return;
+		}	
+		
 		next_scene = 4;
 		close_stage();
 	}
-	
+
 	public void search () {
 		next_scene = 5;
 		close_stage ();
@@ -152,7 +165,7 @@ public class user_controller {
 			   
 			   //check for duplicate
 			   for(Album a : activeUser.getAlbums()){
-				   if(a.getName().equals(newName)){
+				   if(a.getName().equals(newName) && a != albumToRename) {
 					   Alert alert = new Alert(AlertType.ERROR);
 					   alert.initOwner(stage);
 					   alert.setTitle("ERROR");
@@ -207,7 +220,7 @@ public class user_controller {
 			//check for duplicate
 			for(Album a : activeUser.getAlbums()){
 				   if(a.getName().equals(text)){
-					   Alert alert = new Alert(AlertType.ERROR);
+					   Alert alert = new Alert(AlertType.WARNING);
 					   alert.initOwner(stage);
 					   alert.setTitle("ERROR");
 					   alert.setHeaderText("Duplicate found");
