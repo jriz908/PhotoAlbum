@@ -1,15 +1,48 @@
 package controls;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Photo;
 
 public class photo_controller {
 	private static Stage stage;
 	private static int next_scene;
 	
+	private Photo activePhoto;
+	
+	@FXML 
+	private ImageView imageview;
+	
+	@FXML
+	private TextField photo_caption;
+	
+	@FXML
+	private TextField photo_tags;
+	
+	@FXML
+	private TextField date;
+	
 	@FXML
 	private void initialize () {
+		
+		activePhoto = album_controller.getActivePhoto();
+		
+		imageview.setImage(new Image(activePhoto.getFile().toURI().toString()));
+		
+		
+		photo_caption.setText(activePhoto.getCaption());
+		
+		if(activePhoto.getDate() != null)
+			date.setText(activePhoto.getDate().toString());
+		
+		//date.setEditable(false);
+		
+		
+		
 		stage = new Stage ();
 	}
 	
@@ -29,9 +62,8 @@ public class photo_controller {
 	
 	public void edit () {
 		
-		/**
-		 * insert code here
-		 */
+		activePhoto.setCaption(photo_caption.getText());
+		
 	}
 	
 	public void album () {

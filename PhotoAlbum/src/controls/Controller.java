@@ -144,6 +144,8 @@ public class Controller {
 				root = (AnchorPane) loader.load();
 				scene = new Scene (root);
 				
+				scene.getStylesheets().addAll(this.getClass().getResource("/views/tilepane.css").toExternalForm());
+				
 				album_controller ctrl= (album_controller) loader.getController();
 				stage.hide();
 				Thread.sleep(100);
@@ -212,6 +214,110 @@ public class Controller {
 		}
 	}
 	
+	public void search_screen () {
+		
+		try {
+			FXMLLoader loader = new FXMLLoader ();
+			loader.setLocation(Controller.class.getResource("/views/search_screen.fxml"));
+			root = (AnchorPane) loader.load();
+			scene = new Scene (root);
+			
+			search_controller ctrl= (search_controller) loader.getController();
+			stage.hide();
+			Thread.sleep(100);
+			ctrl.start();
+			next_scene = search_controller.get_next();
+			next_scene ();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void activeUser_data () {
+		
+		if (activeUser == null)
+			return;
+		
+		String u = activeUser.getUsername();
+		
+		if (u == null)
+			return;
+		
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream (new FileOutputStream ("data/" + u+ "/user_info"));
+			oos.writeObject(activeUser);
+			oos.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void read_in_users () {
+		File folder = new File ("data");
+		
+		if (folder.listFiles() == null)
+			return;
+		
+		File[] files = folder.listFiles();
+		
+		for (File f: files) {
+			
+			if (!f.isDirectory())
+				continue;
+			try {
+				ObjectInputStream ois = new ObjectInputStream (new FileInputStream ("data/"+f.getName()+"/user_info"));
+				User u = (User) ois.readObject();
+				data.getUsers().add(u);
+				ois.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+	}
+	
+	public static void write_users () {
+		List<User> users_added = admin_controller.get_UsersAdded();
+		List<User> users_deleted = admin_controller.get_UsersDeleted();
+		
+		if (!users_deleted.isEmpty()) {
+			for (User u: users_deleted) {
+				try {
+					File f = new File ("data/"+u.getUsername());
+					deleteDir(f);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		if (!users_added.isEmpty()) {
+			for (User u: users_added) {
+				try {
+					File f = new File ("data/"+u.getUsername());
+					f.mkdir();
+					ObjectOutputStream oos = new ObjectOutputStream (new FileOutputStream (f+"/user_info"));
+					oos.writeObject(u);
+					oos.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public static void deleteDir(File dir) {
+	      if (dir.isDirectory()) {
+	         String[] children = dir.list();
+	         for (int i = 0; i < children.length; i++) {
+	            deleteDir(new File(dir, children[i]));
+	         }
+	      }
+	      
+	      dir.delete();
+	}
+	
 	public void next_scene () {
 		
 		switch (next_scene) {
@@ -248,25 +354,6 @@ public class Controller {
 		
 	}
 	
-	public void search_screen () {
-		
-		try {
-			FXMLLoader loader = new FXMLLoader ();
-			loader.setLocation(Controller.class.getResource("/views/search_screen.fxml"));
-			root = (AnchorPane) loader.load();
-			scene = new Scene (root);
-			
-			search_controller ctrl= (search_controller) loader.getController();
-			stage.hide();
-			Thread.sleep(100);
-			ctrl.start();
-			next_scene = search_controller.get_next();
-			next_scene ();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
 	/**
 	 * controls the main stage
 	 * switches between the respective stages
@@ -290,74 +377,6 @@ public class Controller {
 	
 	public static User getActiveUser(){
 		return activeUser;
-	}
-	
-	public void activeUser_data () {
-		
-		if (activeUser == null)
-			return;
-		
-		String u = activeUser.getUsername();
-		
-		if (u == null)
-			return;
-		
-		try {
-			ObjectOutputStream oos = new ObjectOutputStream (new FileOutputStream ("data/" + u));
-			oos.writeObject(activeUser);
-			oos.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void read_in_users () {
-		File folder = new File ("data");
-		File[] files = folder.listFiles();
-		
-		if (files.length < 1)
-			return;
-		
-		for (File f: files) {
-			try {
-				ObjectInputStream ois = new ObjectInputStream (new FileInputStream ("data/"+f.getName()));
-				User u = (User) ois.readObject();
-				data.getUsers().add(u);
-				ois.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-		}
-		
-	}
-	
-	public void write_users () {
-		List<User> users_added = admin_controller.get_UsersAdded();
-		List<User> users_deleted = admin_controller.get_UsersDeleted();
-		
-		if (!users_deleted.isEmpty()) {
-			for (User u: users_deleted) {
-				try {
-					File f = new File ("data/"+u.getUsername());
-					f.delete();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		if (!users_added.isEmpty()) {
-			for (User u: users_added) {
-				try {
-					ObjectOutputStream oos = new ObjectOutputStream (new FileOutputStream ("data/" + u.getUsername()));
-					oos.writeObject(u);
-					oos.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
 	}
 	
 }
