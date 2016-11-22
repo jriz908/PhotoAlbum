@@ -6,6 +6,8 @@ import java.util.List;
 
 public class Album implements Serializable{
 	
+	static final long serialVersionUID = 1L;
+	
 	private String name;
 	private List<Photo> photos;
 	

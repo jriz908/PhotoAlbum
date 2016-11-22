@@ -2,19 +2,20 @@ package model;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import javafx.scene.image.Image;
-
 public class Photo implements Serializable {
+	
+	static final long serialVersionUID = 1L;
 	
 	private File file;
 	private String path;
 	private String name;
 	private String caption;
-	private Map<String, String> tags;
+	private List<Tag> tags;
 	private Date date;
 	
 	public Photo(File file){
@@ -25,7 +26,7 @@ public class Photo implements Serializable {
 		this.date = new Date(milliseconds);
 		
 		this.caption = "";
-		this.tags = new HashMap<String, String>();
+		this.tags = new ArrayList<Tag> ();
 		
 	}
 	
@@ -57,11 +58,9 @@ public class Photo implements Serializable {
 	public void setCaption(String caption) {
 		this.caption = caption;
 	}
-	public Map<String, String> getTags() {
+	
+	public List<Tag> getTags() {
 		return tags;
-	}
-	public void setTags(Map<String, String> tags) {
-		this.tags = tags;
 	}
 
 	public Date getDate() {

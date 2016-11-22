@@ -1,6 +1,8 @@
 package controls;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -13,6 +15,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Album;
 import model.Data;
+import model.Tag;
 import model.User;
 
 public class admin_controller {
@@ -37,6 +40,8 @@ public class admin_controller {
 		
 		temp = Controller.getData();
 		usersList = temp.getUsers();
+		sort();
+		 
 		listview.setItems(usersList);
 		
 		users_added = new ArrayList<User>();
@@ -91,6 +96,7 @@ public class admin_controller {
 			temp.getUsers().add(newUser);
 			users_added.add(newUser);
 			new_username_text.setText("");
+			sort();
 			
 		}else{
 			Alert alert = new Alert(AlertType.WARNING);
@@ -127,9 +133,19 @@ public class admin_controller {
 		
 		temp.getUsers().remove(userToDelete);
 		users_deleted.add(userToDelete);
+		sort();
 		
 	}
 	
+	public void sort () {
+		
+		Collections.sort(usersList, new Comparator<User>(){
+			public int compare(User a, User b) {
+				return a.getUsername().compareTo(b.getUsername());
+			}
+		});
+	}
+
 	
 	public void show_stage () {
 		stage.showAndWait();

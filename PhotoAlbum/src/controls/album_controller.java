@@ -165,6 +165,20 @@ public class album_controller {
 		
 		File file = fc.showOpenDialog(stage);
 		
+		//check for duplicates
+		for(Photo p : activeAlbum.getPhotos()){
+			if(p.getFile().equals(file)){
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.initOwner(stage);
+				alert.setTitle("ERROR");
+				alert.setHeaderText("Duplicate photo");
+				alert.setContentText("Can not add a duplicate photo to album.");
+
+				alert.showAndWait();
+				return;
+			}
+		}
+		
 		Photo newPhoto = new Photo(file);
 		
 		String path = "data/" + Controller.getActiveUser().getUsername() + File.separator + activeAlbum.getName() + File.separator + newPhoto.getName();

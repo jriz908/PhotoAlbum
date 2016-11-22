@@ -2,6 +2,8 @@ package controls;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +23,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Album;
+import model.Tag;
 import model.User;
 
 public class user_controller {
@@ -44,7 +47,8 @@ public class user_controller {
 		activeUser = Controller.getActiveUser();
 		
 		albumsList = FXCollections.observableArrayList(activeUser.getAlbums());
-		
+		sort();
+		 
 		listview.setItems(albumsList);
 		
 		stage = new Stage ();
@@ -72,6 +76,16 @@ public class user_controller {
 	public void show_stage () {
 		stage.showAndWait();	
 	}
+	
+	public void sort () {
+		
+		Collections.sort(albumsList, new Comparator<Album>(){
+			public int compare(Album a, Album b) {
+				return a.getName().compareTo(b.getName());
+			}
+		});
+	}
+
 	
 	public void open () {
 		
@@ -129,7 +143,7 @@ public class user_controller {
 		   
 		dialog.getDialogPane().setContent(grid);
 		   
-		ButtonType button = new ButtonType("Okay", ButtonData.OK_DONE);
+		ButtonType button = new ButtonType("OK", ButtonData.OK_DONE);
 		dialog.getDialogPane().getButtonTypes().add(button);
 		
 		ButtonType button2 = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
@@ -185,14 +199,10 @@ public class user_controller {
 			   
 			   albumToRename.setName(newName);		   
 			   f.renameTo(f2);
+			   sort();
 			   listview.refresh();
-			   
+			  
 		   }
-
-		
-		
-			
-		
 	
 	}
 	
@@ -222,7 +232,7 @@ public class user_controller {
 			
 		}
 		
-		
+		 sort();
 	}
 	
 	public void create () {
@@ -253,7 +263,7 @@ public class user_controller {
 			f.mkdir();
 			
 			new_album_text.setText("");
-			
+			sort();
 		
 			
 		}else{
