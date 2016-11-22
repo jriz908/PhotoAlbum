@@ -144,6 +144,8 @@ public class Controller {
 				root = (AnchorPane) loader.load();
 				scene = new Scene (root);
 				
+				scene.getStylesheets().addAll(this.getClass().getResource("/views/tilepane.css").toExternalForm());
+				
 				album_controller ctrl= (album_controller) loader.getController();
 				stage.hide();
 				Thread.sleep(100);
@@ -212,42 +214,6 @@ public class Controller {
 		}
 	}
 	
-	public void next_scene () {
-		
-		switch (next_scene) {
-		case CLOSE:
-			activeUser_data();
-			System.exit(0);
-			break;
-		case LOGIN:
-			activeUser_data();
-			setStage ();
-			break;
-		case ADMIN:
-			admin_screen ();
-			break;
-		case USER:
-			user_screen ();
-			break;
-		case ALBUM:
-			album_screen ();
-			break;
-		case SEARCH:
-			search_screen();
-			break;
-		case PHOTO:
-			photo_screen();
-			break;
-		case MOVE_COPY:
-			move_copy ();
-			break;
-		case SLIDESHOW:
-			slideshow ();
-			break;
-		}
-		
-	}
-	
 	public void search_screen () {
 		
 		try {
@@ -265,31 +231,6 @@ public class Controller {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	/**
-	 * controls the main stage
-	 * switches between the respective stages
-	 */
-	public void setStage () {
-		stage = Main.getStage();
-		stage.show();
-	}
-	
-	public static Stage getStage () {
-		return stage;
-	}
-	
-	public static Scene getScene () {
-		return scene;
-	}
-	
-	public static Data getData(){
-		return data;
-	}
-	
-	public static User getActiveUser(){
-		return activeUser;
 	}
 	
 	public void activeUser_data () {
@@ -313,12 +254,16 @@ public class Controller {
 	
 	public static void read_in_users () {
 		File folder = new File ("data");
-		File[] files = folder.listFiles();
 		
-		if (files.length < 1)
+		if (folder.listFiles() == null)
 			return;
 		
+		File[] files = folder.listFiles();
+		
 		for (File f: files) {
+			
+			if (!f.isDirectory())
+				continue;
 			try {
 				ObjectInputStream ois = new ObjectInputStream (new FileInputStream ("data/"+f.getName()+"/user_info"));
 				User u = (User) ois.readObject();
@@ -371,6 +316,67 @@ public class Controller {
 	      }
 	      
 	      dir.delete();
+	}
+	
+	public void next_scene () {
+		
+		switch (next_scene) {
+		case CLOSE:
+			activeUser_data();
+			System.exit(0);
+			break;
+		case LOGIN:
+			activeUser_data();
+			setStage ();
+			break;
+		case ADMIN:
+			admin_screen ();
+			break;
+		case USER:
+			user_screen ();
+			break;
+		case ALBUM:
+			album_screen ();
+			break;
+		case SEARCH:
+			search_screen();
+			break;
+		case PHOTO:
+			photo_screen();
+			break;
+		case MOVE_COPY:
+			move_copy ();
+			break;
+		case SLIDESHOW:
+			slideshow ();
+			break;
+		}
+		
+	}
+	
+	/**
+	 * controls the main stage
+	 * switches between the respective stages
+	 */
+	public void setStage () {
+		stage = Main.getStage();
+		stage.show();
+	}
+	
+	public static Stage getStage () {
+		return stage;
+	}
+	
+	public static Scene getScene () {
+		return scene;
+	}
+	
+	public static Data getData(){
+		return data;
+	}
+	
+	public static User getActiveUser(){
+		return activeUser;
 	}
 	
 }

@@ -1,26 +1,26 @@
 package controls;
 
-import java.util.Collections;
-import java.util.Comparator;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Album;
-import model.Data;
 import model.User;
 
 public class user_controller {
@@ -28,7 +28,7 @@ public class user_controller {
 	private static int next_scene = 0;
 	
 	private ObservableList<Album> albumsList;
-	
+	private static Album activeAlbum;
 	//private Data temp;
 	
 	private User activeUser;
@@ -86,6 +86,8 @@ public class user_controller {
 			
 			return;
 		}	
+		
+		activeAlbum = listview.getSelectionModel().getSelectedItem();
 		
 		next_scene = 4;
 		close_stage();
@@ -177,7 +179,12 @@ public class user_controller {
 				   }
 			   }
 			   
-			   albumToRename.setName(newName);
+			
+			   File f = new File ("data/" + activeUser.getUsername() + File.separator + albumToRename.getName());
+			   File f2 = new File ("data/" + activeUser.getUsername() + File.separator + newName);
+			   
+			   albumToRename.setName(newName);		   
+			   f.renameTo(f2);
 			   listview.refresh();
 			   
 		   }
@@ -207,6 +214,14 @@ public class user_controller {
 		albumsList.remove(albumToDelete);
 		
 		
+		File f = new File ("data/" + activeUser.getUsername() + File.separator + albumToDelete.getName());
+		
+		try {
+			Controller.deleteDir(f);
+		} catch (Exception e) {
+			
+		}
+		
 		
 	}
 	
@@ -234,8 +249,22 @@ public class user_controller {
 			activeUser.getAlbums().add(newAlbum);
 			albumsList.add(newAlbum);
 			
+			File f = new File ("data/" + activeUser.getUsername()+ File.separator + text);
+			f.mkdir();
+			
 			new_album_text.setText("");
 			
+		
+			
+		}else{
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(stage);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No album name entered.");
+			alert.setContentText("No album name entered.");
+
+			alert.showAndWait();
+			return;
 		}
 		
 	}
@@ -247,5 +276,11 @@ public class user_controller {
 	public static int get_next () {
 		return next_scene;
 	}
+
+	public static Album getActiveAlbum() {
+		return activeAlbum;
+	}
+
+
 	
 }

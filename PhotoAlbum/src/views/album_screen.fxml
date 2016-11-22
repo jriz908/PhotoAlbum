@@ -2,16 +2,16 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="487.0" prefWidth="553.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.album_controller">
+<AnchorPane prefHeight="487.0" prefWidth="553.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.album_controller">
    <children>
       <Pane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ListView layoutX="31.0" layoutY="63.0" prefHeight="316.0" prefWidth="489.0" />
             <ButtonBar layoutX="348.0" layoutY="14.0" prefHeight="40.0" prefWidth="165.0">
               <buttons>
                 <Button mnemonicParsing="false" onAction="#quit" text="Safe Quit" textFill="#9a0e13">
@@ -26,22 +26,22 @@
                   </Button>
               </buttons>
             </ButtonBar>
-            <Button layoutX="47.0" layoutY="22.0" mnemonicParsing="false" onAction="#view" text="View/Edit Photo" textFill="#1a8632">
+            <Button layoutX="39.0" layoutY="22.0" mnemonicParsing="false" onAction="#view" text="View/Edit Photo" textFill="#1a8632">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="39.0" layoutY="416.0" mnemonicParsing="false" onAction="#add" text="Add Photo" textFill="#24861d">
+            <Button layoutX="39.0" layoutY="441.0" mnemonicParsing="false" onAction="#add" text="Add Photo" textFill="#24861d">
                <font>
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="145.0" layoutY="416.0" mnemonicParsing="false" onAction="#remove" text="Remove Photo" textFill="#dd0b27">
+            <Button layoutX="143.0" layoutY="441.0" mnemonicParsing="false" onAction="#remove" text="Remove Photo" textFill="#dd0b27">
                <font>
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="392.0" layoutY="391.0" mnemonicParsing="false" onAction="#move_copy" text="Move/Copy Photo" textFill="#5b13e1">
+            <Button layoutX="261.0" layoutY="441.0" mnemonicParsing="false" onAction="#move_copy" text="Move/Copy Photo" textFill="#5b13e1">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -56,6 +56,15 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
+            <ScrollPane layoutX="39.0" layoutY="54.0" prefHeight="377.0" prefWidth="488.0">
+               <content>
+                  <AnchorPane prefHeight="374.0" prefWidth="485.0">
+                     <children>
+                        <TilePane fx:id="tilepane" prefHeight="374.0" prefWidth="485.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
          </children>
       </Pane>
    </children>

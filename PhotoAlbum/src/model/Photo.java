@@ -1,36 +1,56 @@
 package model;
 
+import java.io.File;
+import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javafx.scene.image.Image;
 
-public class Photo {
+public class Photo implements Serializable {
 	
-	private Image image;
+	private File file;
 	private String path;
+	private String name;
 	private String caption;
 	private Map<String, String> tags;
 	private Date date;
 	
-	public Photo(Image image, String path, Date date){
-		this.image = image;
-		this.path = path;
-		this.setDate(date);
+	public Photo(File file){
+		this.file = file;
+		this.name = file.getName();
+		
+		long milliseconds = file.lastModified();
+		this.date = new Date(milliseconds);
+		
+		this.caption = "";
+		this.tags = new HashMap<String, String>();
+		
 	}
 	
-	public Image getImage() {
-		return image;
+	public File getFile() {
+		return file;
 	}
-	public void setImage(Image image) {
-		this.image = image;
+
+	public void setFile(File file) {
+		this.file = file;
 	}
+
 	public String getPath() {
 		return path;
 	}
 	public void setPath(String path) {
 		this.path = path;
 	}
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getCaption() {
 		return caption;
 	}

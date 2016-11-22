@@ -74,7 +74,7 @@ public class admin_controller {
 			//check for duplicate
 			for(User u : temp.getUsers()){
 				   if(u.getUsername().equals(text)){
-					   Alert alert = new Alert(AlertType.ERROR);
+					   Alert alert = new Alert(AlertType.WARNING);
 					   alert.initOwner(stage);
 					   alert.setTitle("ERROR");
 					   alert.setHeaderText("Duplicate found");
@@ -92,6 +92,17 @@ public class admin_controller {
 			users_added.add(newUser);
 			new_username_text.setText("");
 			
+		}else{
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(stage);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No username entered");
+			alert.setContentText("Please enter a username.");
+
+			new_username_text.setText("");
+
+			alert.showAndWait();
+			return;
 		}
 		
 	}
@@ -100,8 +111,19 @@ public class admin_controller {
 		
 		User userToDelete = listview.getSelectionModel().getSelectedItem();
 		
-		if(userToDelete == null)
+		if(userToDelete == null){
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(stage);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No user selected.");
+			alert.setContentText("Please select a user to delete.");
+
+			new_username_text.setText("");
+
+			alert.showAndWait();
 			return;
+		}
+			
 		
 		temp.getUsers().remove(userToDelete);
 		users_deleted.add(userToDelete);
