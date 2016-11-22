@@ -253,12 +253,6 @@ public class user_controller {
 			f.mkdir();
 			
 			new_album_text.setText("");
-			
-<<<<<<< HEAD
-		
-			
-=======
->>>>>>> 84e881c5a9b71094b11b4cb6d2b6e1cf91fd80c3
 		}else{
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(stage);
