@@ -253,6 +253,9 @@ public class user_controller {
 			f.mkdir();
 			
 			new_album_text.setText("");
+			
+		
+			
 		}else{
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(stage);
