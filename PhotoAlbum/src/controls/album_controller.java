@@ -270,23 +270,6 @@ public class album_controller {
 		
 		tilepane.getChildren().add(createTile(newPhoto));
 		
-		
-		
-		
-		
-		
-		//System.out.println(tilepane.getChildren().size());
-		
-		
-		//System.out.println(activeAlbum.getPhotos().size());
-		
-		
-	
-		
-		
-		
-		
-		
 	}
 	
 	/**
