@@ -93,7 +93,6 @@ public class album_controller {
 	public void showImages(){
 		for(Photo p : activeAlbum.getPhotos()){
 			tilepane.getChildren().add(createTile(p));
-			System.out.println(p.getPath());
 		}
 	}
 	
@@ -116,7 +115,7 @@ public class album_controller {
 		
 		ImageView iv = new ImageView();
 		
-		iv.setImage(new Image(photo.getFile().toURI().toString()));
+		iv.setImage(new Image("File:"+photo.getPath()));
 		iv.setFitHeight(100);
 		iv.setPreserveRatio(true);
 		iv.setSmooth(true);
