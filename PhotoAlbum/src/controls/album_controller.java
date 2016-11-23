@@ -93,7 +93,6 @@ public class album_controller {
 	public void showImages(){
 		for(Photo p : activeAlbum.getPhotos()){
 			tilepane.getChildren().add(createTile(p));
-			System.out.println(p.getPath());
 		}
 	}
 	
