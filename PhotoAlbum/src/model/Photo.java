@@ -7,17 +7,55 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 
+ * @author Jacob Rizer
+ * @author Terence Williams
+ * 
+ * This is our photo class which contains all the data
+ * needed to represent one photo object, which will go into
+ * albums.
+ *
+ */
 public class Photo implements Serializable {
 	
 	static final long serialVersionUID = 1L;
 	
+	/**
+	 * File for photo
+	 */
 	private File file;
+	
+	/**
+	 * Path to photo object
+	 */
 	private String path;
+	
+	/**
+	 * Photo name
+	 */
 	private String name;
+	
+	/**
+	 * Caption that user can edit
+	 */
 	private String caption;
+	
+	/**
+	 * List of tags associated with photo
+	 */
 	private List<Tag> tags;
+	
+	/**
+	 * Date photo was taken.
+	 */
 	private Date date;
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param file - file containing image.
+	 */
 	public Photo(File file){
 		this.file = file;
 		this.name = file.getName();

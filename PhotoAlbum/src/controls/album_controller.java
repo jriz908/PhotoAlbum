@@ -64,7 +64,7 @@ public class album_controller {
 		
 		showImages();
 		
-		System.out.println(tilepane.getChildren().size());
+		//System.out.println(tilepane.getChildren().size());
 		
 		stage = new Stage ();
 	}
@@ -88,13 +88,14 @@ public class album_controller {
 		ImageView iv = new ImageView();
 		
 		iv.setImage(new Image(photo.getFile().toURI().toString()));
-		iv.setFitHeight(120);
+		iv.setFitHeight(100);
 		iv.setPreserveRatio(true);
 		iv.setSmooth(true);
 		//iv.setEffect(new DropShadow());
 		
 		StackPane pane = new StackPane(iv, label);
 		pane.setMinHeight(iv.getFitHeight() + 20);
+		pane.setMinWidth(200);
 		pane.setAlignment(iv, Pos.TOP_CENTER);
 		pane.setAlignment(label, Pos.BOTTOM_CENTER);
 		pane.setUserData(photo);
@@ -146,6 +147,18 @@ public class album_controller {
 	}
 	
 	public void move_copy () {
+		
+		if(activePane == null){
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(stage);
+			alert.setTitle("ERROR");
+			alert.setHeaderText("No photo selected");
+			alert.setContentText("Please select a photo to move/copy");
+
+			alert.showAndWait();
+			return;
+		}
+		
 		next_scene = 7;
 		close_stage();
 	}
@@ -164,6 +177,10 @@ public class album_controller {
 		fc.getExtensionFilters().add(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
 		
 		File file = fc.showOpenDialog(stage);
+		
+		if(file == null){
+			return;
+		}
 		
 		//check for duplicates
 		for(Photo p : activeAlbum.getPhotos()){
@@ -206,7 +223,7 @@ public class album_controller {
 		
 		
 		
-		System.out.println(tilepane.getChildren().size());
+		//System.out.println(tilepane.getChildren().size());
 		
 		
 		//System.out.println(activeAlbum.getPhotos().size());

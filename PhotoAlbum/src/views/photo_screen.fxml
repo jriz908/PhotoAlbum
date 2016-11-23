@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="453.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.photo_controller">
+<AnchorPane prefHeight="453.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.photo_controller">
    <children>
       <Pane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -19,9 +19,9 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <TextField fx:id="date" alignment="CENTER" editable="true" layoutX="354.0" layoutY="130.0" promptText="Date" />
+            <TextField fx:id="date" alignment="CENTER" editable="false" layoutX="354.0" layoutY="130.0" promptText="Date" />
             <TextField fx:id="photo_caption" alignment="CENTER" layoutX="38.0" layoutY="329.0" promptText="Change Caption" />
-            <Button layoutX="52.0" layoutY="389.0" mnemonicParsing="false" onAction="#edit" text="Edit Photo Info" textFill="#391c9a">
+            <Button layoutX="60.0" layoutY="377.0" mnemonicParsing="false" onAction="#edit" text="Edit Caption" textFill="#391c9a">
                <font>
                   <Font name="System Bold Italic" size="12.0" />
                </font>

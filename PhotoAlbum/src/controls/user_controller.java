@@ -1,10 +1,11 @@
 package controls;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
+import java.util.Date;
 import java.util.Optional;
 
 import javafx.collections.FXCollections;
@@ -23,7 +24,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Album;
-import model.Tag;
+import model.Photo;
 import model.User;
 
 public class user_controller {
@@ -32,12 +33,18 @@ public class user_controller {
 	
 	private ObservableList<Album> albumsList;
 	private static Album activeAlbum;
+	private ObservableList<String> details;
+	
 	//private Data temp;
 	
 	private User activeUser;
 	
 	@FXML
 	private TextField new_album_text;
+	
+	@FXML
+	private ListView<String> album_details = new ListView<>();
+	
 	@FXML
 	private ListView<Album> listview = new ListView<>();
 	
@@ -50,7 +57,7 @@ public class user_controller {
 		sort();
 		 
 		listview.setItems(albumsList);
-		
+		details = FXCollections.observableArrayList();
 		stage = new Stage ();
 	}
 	
@@ -60,7 +67,61 @@ public class user_controller {
 		stage.initModality(Modality.WINDOW_MODAL);
 		stage.setTitle("User screen");
 		stage.setScene( Controller.getScene() );
+		
+		listview.getSelectionModel().selectedItemProperty().addListener
+		(((obs, oldVal, newVal) -> showDetails()));
+		
 		show_stage();
+	}
+	
+	public void showDetails () {
+		
+		details.clear();
+		
+		Album a = listview.getSelectionModel().getSelectedItem();
+		
+		if (a == null)
+			return;
+		
+		String name = "Album Name: "+ a.getName();
+		String pics = "Total Photos: " + a.getPhotos().size();
+		
+		Date oldestDate = new Date();
+		Date latestDate = new Date();
+		oldestDate.setTime(Long.MAX_VALUE);
+		latestDate.setTime(Long.MIN_VALUE);
+		
+		for(Photo p : a.getPhotos()){
+			if(p.getDate().getTime() < oldestDate.getTime()){
+				oldestDate = p.getDate();
+			}
+			
+			if (p.getDate().getTime() > latestDate.getTime()) {
+				latestDate = p.getDate();
+			}
+		}
+		
+		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		String oldDate = formatter.format(oldestDate);
+		String newDate = formatter.format(latestDate);
+		
+		String oldestPhoto;
+		String dateRange;
+		
+		if(a.getPhotos().size() > 0){
+			oldestPhoto = "Date of oldest photo: " + oldDate;
+			dateRange = "Date range: " + oldDate + " - " + newDate;
+		}else{
+			oldestPhoto = "Date of oldest photo: \t --";
+			dateRange = "Date range: \t --";
+		}	
+		
+		details.add(name);
+		details.add(pics);
+		details.add(oldestPhoto);
+		details.add(dateRange);
+		
+		album_details.setItems(details);
 	}
 	
 	public void log_out () {

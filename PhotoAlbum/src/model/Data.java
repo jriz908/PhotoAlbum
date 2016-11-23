@@ -3,10 +3,23 @@ package model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * 
+ * @author Jacob Rizer
+ * @author Terence Williams
+ *
+ * This is our data class. It holds our list of users.
+ */
 public class Data{
 	
+	/**
+	 * List of users
+	 */
 	private ObservableList<User> users;
 	
+	/**
+	 * Constructor
+	 */
 	public Data(){
 		users = FXCollections.observableArrayList();
 	}
@@ -19,10 +32,5 @@ public class Data{
 		this.users = users;
 	}
 	
-	public void printUsers(){
-		for(User u : users){
-			System.out.println(u.getUsername());
-		}
-	}
 	
 }

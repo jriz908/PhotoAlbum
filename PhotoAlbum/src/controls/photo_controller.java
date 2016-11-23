@@ -1,5 +1,7 @@
 package controls;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Optional;
@@ -60,8 +62,11 @@ public class photo_controller {
 		
 		photo_caption.setText(activePhoto.getCaption());
 		
-		if(activePhoto.getDate() != null)
-			date.setText(activePhoto.getDate().toString());
+		if(activePhoto.getDate() != null) {
+			DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+			String date_text = formatter.format(activePhoto.getDate());
+			date.setText(date_text);
+		}
 		
 		//date.setEditable(false);
 		
@@ -96,6 +101,12 @@ public class photo_controller {
 	public void edit () {
 		
 		activePhoto.setCaption(photo_caption.getText());
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Caption");
+		alert.setHeaderText("New Caption");
+		alert.setContentText("Photo Caption has been changed!");
+
+		alert.showAndWait();
 		
 	}
 	
@@ -292,7 +303,7 @@ public class photo_controller {
 		dialog.setTitle("Choose Tag Type");
 		dialog.setWidth(300);
 		
-		Label name = new Label("Tage Types:");
+		Label name = new Label("Tag Types:");
 		
 		ObservableList<String> options = 
 			    FXCollections.observableArrayList
