@@ -21,20 +21,43 @@ import model.User;
  * @author Jacob Rizer
  * @author Terence Williams
  *
- * This is our admin controller
+ * This is our admin controller which controls
+ * the admin screen
  */
 public class admin_controller {
+	
 	private static Stage stage;
 	private static int next_scene;
 	
+	/**
+	 * List of users. Can be changed by admin.
+	 */
 	private ObservableList<User> usersList;
+	
+	/**
+	 * A list of users added during this session. For serialization.
+	 */
 	private static List<User> users_added;
+	
+	/**
+	 * A list of users deleted during this session. For serialization.
+	 */
 	private static List<User> users_deleted;
 	
+	/**
+	 * stores static data retrieved from main controller in a temp variable.
+	 */
 	private Data temp;
 	
+	/**
+	 * The textfield where a username is entered.
+	 */
 	@FXML
 	private TextField new_username_text;
+	
+	/**
+	 * List view containing list of users.
+	 */
 	@FXML
 	private ListView<User> listview = new ListView<>();
 	
@@ -55,6 +78,9 @@ public class admin_controller {
 		stage = new Stage ();
 	}
 	
+	/**
+	 * Called when admin screen starts.
+	 */
 	public void start () {
 		Stage primary = Controller.getStage();
 		stage.initOwner(primary);
@@ -64,16 +90,27 @@ public class admin_controller {
 		show_stage ();
 	}
 	
+	/**
+	 * Called when safe quit is pressed. Closes application and stores all data.
+	 */
 	public void quit () {
 		next_scene = 0;
 		close_stage();
 	}
 	
+	/**
+	 * Called when log out is pressed. Goes back to login screen.
+	 */
 	public void log_out () {
 		next_scene = 1;
 		close_stage();
 	}
 	
+	/**
+	 * Called when create user is pressed. Creates a new
+	 * user object which is added to the list of users. No duplicate 
+	 * names are allowed.
+	 */
 	public void create () {
 		
 		String text = new_username_text.getText().trim();
@@ -118,6 +155,10 @@ public class admin_controller {
 		
 	}
 	
+	/**
+	 * Called when delete user button is pressed. If a user is selected
+	 * in the list it deletes the user object and removes it from the list.
+	 */
 	public void delete () {
 		
 		User userToDelete = listview.getSelectionModel().getSelectedItem();
@@ -142,6 +183,9 @@ public class admin_controller {
 		
 	}
 	
+	/**
+	 * Keeps list of users sorted alphabetically
+	 */
 	public void sort () {
 		
 		Collections.sort(usersList, new Comparator<User>(){
