@@ -93,6 +93,7 @@ public class album_controller {
 	public void showImages(){
 		for(Photo p : activeAlbum.getPhotos()){
 			tilepane.getChildren().add(createTile(p));
+			System.out.println(p.getPath());
 		}
 	}
 	
@@ -308,8 +309,9 @@ public class album_controller {
 		Photo photoToDelete = (Photo) activePane.getUserData();
 		
 		activeAlbum.getPhotos().remove(photoToDelete);
-		
 		tilepane.getChildren().remove(activePane);
+		File f = new File (photoToDelete.getPath());
+		Controller.deleteDir(f);
 		
 	}
 	
