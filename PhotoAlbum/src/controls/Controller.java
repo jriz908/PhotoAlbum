@@ -19,8 +19,19 @@ import javafx.stage.Stage;
 import model.Data;
 import model.User;
 
+/**
+ * 
+ * @author Jacob Rizer
+ * @author Terence Williams
+ *
+ * This is the class for our main controller which controls the whole
+ * application and all of the individual screen controllers.
+ */
 public class Controller {
 	
+	/**
+	 * Integers to represent different screens.
+	 */
 	private static final int CLOSE = 0;
 	private static final int LOGIN = 1;
 	private static final int ADMIN = 2;
@@ -31,15 +42,38 @@ public class Controller {
 	private static final int MOVE_COPY = 7;
 	private static final int SLIDESHOW = 8;
 	
+	/**
+	 * Main stage
+	 */
 	private static Stage stage;
+	
+	/**
+	 * The anchorpane that anchors the screen
+	 */
 	private static AnchorPane root;
+	
+	/**
+	 * Main scene
+	 */
 	private static Scene scene;
+	/**
+	 * Integer that holds the value of the next screen to go to
+	 */
 	private static int next_scene = 1;
 	
+	/**
+	 * Data object that holds list of users.
+	 */
 	private static Data data;
+	
+	/**
+	 * User that is currently logged in. This field is used by many other screen controllers.
+	 */
 	private static User activeUser;
 	
-	//fxml elements
+	/**
+	 * The textfield for entering a user to log in to.
+	 */
 	@FXML
 	private TextField username_text;
 	
@@ -51,6 +85,10 @@ public class Controller {
 		read_in_users();
 	}
 	
+	/**
+	 * Called when login button is pressed. If text is present, logs into that user
+	 * or the admin.
+	 */
 	public void login () {
 		
 		String text = username_text.getText().trim();
@@ -95,6 +133,9 @@ public class Controller {
 		next_scene ();
 	}
 	
+	/**
+	 * Loads the user screen which contains albums
+	 */
 	public void user_screen () {
 		try{
 			FXMLLoader loader = new FXMLLoader ();
@@ -115,7 +156,9 @@ public class Controller {
 		
 	}
 	
-	
+	/**
+	 * Loads the admin screen to changes users
+	 */
 	public void admin_screen () {
 		
 		try{
@@ -136,6 +179,9 @@ public class Controller {
 		}
 	}
 	
+	/**
+	 * Loads the album screen which contains photos
+	 */
 	public void album_screen () {
 			
 			try {
@@ -157,6 +203,9 @@ public class Controller {
 			}
 	}
 	
+	/**
+	 * Loads the photo screen for viewing/editing a photo
+	 */
 	public void photo_screen () {
 		
 		try {
@@ -176,6 +225,9 @@ public class Controller {
 		}
 	}
 	
+	/**
+	 * Loads the move/copy screen for moving/copying a photo to a new album
+	 */
 	public void move_copy () {
 		
 		try {
@@ -195,6 +247,9 @@ public class Controller {
 		}
 	}
 	
+	/**
+	 * Loads the slideshow screen for manually switching between photos in an album
+	 */
 	public void slideshow () {
 		
 		try {
@@ -214,6 +269,10 @@ public class Controller {
 		}
 	}
 	
+	/**
+	 * Loads the search screen for searching for photos by dates and tags. 
+	 * You can also create a new album with search results.
+	 */
 	public void search_screen () {
 		
 		try {
@@ -233,6 +292,9 @@ public class Controller {
 		}
 	}
 	
+	/**
+	 * When a user logs out the changes to its data are written to drive.
+	 */
 	public void activeUser_data () {
 		
 		if (activeUser == null)
@@ -252,6 +314,9 @@ public class Controller {
 		}
 	}
 	
+	/**
+	 * Upon starting the application, loads all the users and their data from drive.
+	 */
 	public static void read_in_users () {
 		File folder = new File ("data");
 		
@@ -277,6 +342,10 @@ public class Controller {
 		
 	}
 	
+	/**
+	 * Upon safe quitting, writes all the data that has been changed during session to drive.
+	 * New users may be added and some users may be deleted.
+	 */
 	public static void write_users () {
 		List<User> users_added = admin_controller.get_UsersAdded();
 		List<User> users_deleted = admin_controller.get_UsersDeleted();
@@ -307,6 +376,11 @@ public class Controller {
 		}
 	}
 	
+	/**
+	 * Used for deleteing a file or directory.
+	 * 
+	 * @param dir file or directory to delete.
+	 */
 	public static void deleteDir(File dir) {
 	      if (dir.isDirectory()) {
 	         String[] children = dir.list();
@@ -318,6 +392,10 @@ public class Controller {
 	      dir.delete();
 	}
 	
+	/**
+	 * Called when switching scenes. Checks the value of next_scene 
+	 * and switches to its corresponding screen.
+	 */
 	public void next_scene () {
 		
 		switch (next_scene) {
@@ -371,10 +449,20 @@ public class Controller {
 		return scene;
 	}
 	
+	/**
+	 * Used by other controllers to retrieve data object 
+	 * 
+	 * @return static Data object
+	 */
 	public static Data getData(){
 		return data;
 	}
 	
+	/**
+	 * Used by other controllers to retrieve the user that is logged in
+	 * 
+	 * @return static User object
+	 */
 	public static User getActiveUser(){
 		return activeUser;
 	}

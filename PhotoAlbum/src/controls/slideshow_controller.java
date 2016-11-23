@@ -11,10 +11,30 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Photo;
 
+/**
+ * 
+ * @author Jacob Rizer
+ * @author Terence Williams
+ *
+ */
+
+/**
+ * 
+ * This class controls slide show screen
+ *
+ */
 public class slideshow_controller {
 	private static Stage stage;
 	private static int next_scene;
+	
+	/**
+	 * used to traverses the photos in the album
+	 */
 	private static int i;
+	
+	/**
+	 * list of the photos in the selected album
+	 */
 	private List<Photo> photos;
 	
 	@FXML 
@@ -36,6 +56,9 @@ public class slideshow_controller {
 		show_photo();
 	}
 	
+	/**
+	 * initializes the slide show stage
+	 */
 	public void start () {
 		Stage primary = Controller.getStage();
 		stage.initOwner(primary);
@@ -45,11 +68,17 @@ public class slideshow_controller {
 		show_stage ();
 	}
 	
+	/**
+	 * signals for the application to be closed
+	 */
 	public void quit () {
 		next_scene = 0;
 		close_stage();
 	}
 	
+	/**
+	 * goes to the previous picture in the album
+	 */
 	public void prev () {
 		if (photos.isEmpty())
 			return;
@@ -62,6 +91,9 @@ public class slideshow_controller {
 		show_photo();
 	}
 	
+	/**
+	 * goes to the next picture in the album
+	 */
 	public void next () {
 		if (photos.isEmpty())
 			return;
@@ -74,6 +106,9 @@ public class slideshow_controller {
 		show_photo ();
 	}
 	
+	/**
+	 * shows the current photo
+	 */
 	public void show_photo () {
 		
 		Photo p = photos.get(i);
@@ -89,13 +124,11 @@ public class slideshow_controller {
 		else
 			label.setText("(No Caption)");
 		
-		
-		
-
-		
-		
 	}
 	
+	/**
+	 * signals to go to the album stage
+	 */
 	public void album () {
 		next_scene = 4;
 		stage.close();

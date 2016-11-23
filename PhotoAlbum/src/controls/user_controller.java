@@ -27,16 +27,41 @@ import model.Album;
 import model.Photo;
 import model.User;
 
+/**
+ * 
+ * @author Jacob Rizer
+ * @author Terence Williams
+ *
+ */
+
+/**
+ * 
+ * This class controls the user screen
+ *
+ */
 public class user_controller {
+	
 	private static Stage stage;
 	private static int next_scene = 0;
 	
+	/**
+	 * This is the list of albums that the user has
+	 */
 	private ObservableList<Album> albumsList;
+	
+	/**
+	 * This is the current selected album
+	 */
 	private static Album activeAlbum;
+	
+	/**
+	 * List of the active album details
+	 */
 	private ObservableList<String> details;
 	
-	//private Data temp;
-	
+	/**
+	 * current user who is logged in
+	 */
 	private User activeUser;
 	
 	@FXML
@@ -61,6 +86,9 @@ public class user_controller {
 		stage = new Stage ();
 	}
 	
+	/**
+	 * Initializes the user controller stage
+	 */
 	public void start () {
 		Stage primary = Controller.getStage();
 		stage.initOwner(primary);
@@ -74,6 +102,9 @@ public class user_controller {
 		show_stage();
 	}
 	
+	/**
+	 * Shows the details of the currently selected songs
+	 */
 	public void showDetails () {
 		
 		details.clear();
@@ -124,11 +155,17 @@ public class user_controller {
 		album_details.setItems(details);
 	}
 	
+	/**
+	 * logs out the current user 
+	 */
 	public void log_out () {
 		next_scene = 1;
 		close_stage();
 	}
 	
+	/**
+	 * signals for the application to be closed
+	 */
 	public void quit () {
 		next_scene = 0;
 		close_stage();
@@ -138,6 +175,9 @@ public class user_controller {
 		stage.showAndWait();	
 	}
 	
+	/**
+	 * sorts the user albums in alphabetical order
+	 */
 	public void sort () {
 		
 		Collections.sort(albumsList, new Comparator<Album>(){
@@ -147,7 +187,9 @@ public class user_controller {
 		});
 	}
 
-	
+	/**
+	 * opens the selected album and show its photos
+	 */
 	public void open () {
 		
 		if(listview.getSelectionModel().getSelectedItem() == null){
@@ -168,11 +210,17 @@ public class user_controller {
 		close_stage();
 	}
 
+	/**
+	 * signals the main controller to open the search stage
+	 */
 	public void search () {
 		next_scene = 5;
 		close_stage ();
 	}
 	
+	/**
+	 * renames the selected album 
+	 */
 	public void rename () {
 		
 		Album albumToRename = listview.getSelectionModel().getSelectedItem();
@@ -267,6 +315,9 @@ public class user_controller {
 	
 	}
 	
+	/**
+	 * deletes the selected album
+	 */
 	public void delete () {
 		
 		Album albumToDelete = listview.getSelectionModel().getSelectedItem();
@@ -296,6 +347,10 @@ public class user_controller {
 		 sort();
 	}
 	
+	/**
+	 * creates a new album and names it based on
+	 * the name entered in the create album text field
+	 */
 	public void create () {
 		
 		String text = new_album_text.getText().trim();

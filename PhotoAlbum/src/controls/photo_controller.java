@@ -27,12 +27,38 @@ import javafx.util.Callback;
 import model.Photo;
 import model.Tag;
 
+/**
+ * 
+ * @author Jacob Rizer
+ * @author Terence Williams
+ *
+ */
+
+/**
+ * 
+ * controls the photo scene
+ *
+ */
 public class photo_controller {
 	private static Stage stage;
 	private static int next_scene;
+	
+	/**
+	 * decides which item from the tag type
+	 * ComboBox should be auto selected
+	 * it is defaulted to the first element
+	 */
 	private static int i;
 	
+	/**
+	 * the current photo that is being displayed
+	 */
 	private Photo activePhoto;
+	
+	/**
+	 * list of all tags associated with this photo
+	 * 
+	 */
 	private static ObservableList<Tag> photo_tags;
 	
 	@FXML 
@@ -75,6 +101,9 @@ public class photo_controller {
 		stage = new Stage ();
 	}
 	
+	/**
+	 * initializes the photo stage
+	 */
 	public void start () {
 		Stage primary = Controller.getStage();
 		stage.initOwner(primary);
@@ -84,6 +113,9 @@ public class photo_controller {
 		show_stage ();
 	}
 	
+	/**
+	 * sorts the tags in alphabetic order based on the values
+	 */
 	public void sort () {
 		
 		Collections.sort(photo_tags, new Comparator<Tag>(){
@@ -93,11 +125,17 @@ public class photo_controller {
 		});
 	}
 	
+	/**
+	 * signals for the application to close
+	 */
 	public void quit () {
 		next_scene = 0;
 		close_stage();
 	}
 	
+	/**
+	 * edits the photo caption
+	 */
 	public void edit () {
 		
 		activePhoto.setCaption(photo_caption.getText());
@@ -110,6 +148,9 @@ public class photo_controller {
 		
 	}
 	
+	/**
+	 * adds a new tag based on the type and value entered
+	 */
 	public void add_tag () {
 		
 		String tag = choose_tagType();
@@ -163,6 +204,9 @@ public class photo_controller {
 		sort();
 	}
 	
+	/**
+	 * edits the currently selected tag
+	 */
 	public void edit_tag () {
 		Tag t = tags.getSelectionModel().getSelectedItem();
 		
@@ -278,6 +322,10 @@ public class photo_controller {
 		
 	}
 	
+	
+	/**
+	 * deletes the currently selected tag
+	 */
 	public void delete_tag () {
 		Tag t = tags.getSelectionModel().getSelectedItem();
 		
@@ -297,6 +345,10 @@ public class photo_controller {
 		sort();
 	}
 	
+	/**
+	 * pop up dialog box which allows the user to choose the tag type
+	 * @return
+	 */
 	public String choose_tagType () {
 		Dialog<String> dialog = new Dialog<>();
 		dialog.initOwner(stage);
@@ -352,6 +404,12 @@ public class photo_controller {
 		return null;
 	}
 	
+	/**
+	 * pop up dialog box which allows the user to enter the tag value
+	 * 
+	 * @param s
+	 * @return
+	 */
 	public String enter_value (String s) {
 		Dialog<String> dialog = new Dialog<>();
 		dialog.initOwner(stage);
@@ -399,6 +457,9 @@ public class photo_controller {
 		return null;
 	}
 	
+	/**
+	 * signals for the application to go to the album stage
+	 */
 	public void album () {
 		next_scene = 4;
 		close_stage();

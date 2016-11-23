@@ -7,8 +7,6 @@ import java.nio.file.StandardCopyOption;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.Date;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,6 +32,18 @@ import model.Photo;
 import model.Tag;
 import model.User;
 
+/**
+ * 
+ * @author Jacob Rizer
+ * @author Terence Williams
+ *
+ */
+
+/**
+ * 
+ * controls the search screen
+ *
+ */
 public class search_controller {
 	private static Stage stage;
 	private static int next_scene;
@@ -89,6 +99,9 @@ public class search_controller {
 		stage = new Stage ();
 	}
 	
+	/**
+	 * initializes the search stage
+	 */
 	public void start () {
 		Stage primary = Controller.getStage();
 		stage.initOwner(primary);
@@ -98,11 +111,18 @@ public class search_controller {
 		show_stage ();
 	}
 	
+	/**
+	 * signals for the application to close
+	 */
 	public void quit () {
 		next_scene = 0;
 		close_stage();
 	}
 	
+	/**
+	 * searches all the user albums based on the search criteria
+	 * This includes date range and tags
+	 */
 	public void search () {
 		
 		long startTime = 0;
@@ -222,6 +242,9 @@ public class search_controller {
 		
 	}
 	
+	/**
+	 * creates a new album from the search results
+	 */
 	public void create () {
 		
 		//check for empty search window
@@ -287,10 +310,6 @@ public class search_controller {
 		
 		Controller.getActiveUser().getAlbums().add(newAlbum);
 		
-		
-		
-		
-		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.initOwner(stage);
 		alert.setTitle("DONE");
@@ -302,6 +321,12 @@ public class search_controller {
 		
 	}
 	
+	/**
+	 * creates the tile pane that displays the search results
+	 * 
+	 * @param photo
+	 * @return
+	 */
 	public StackPane createTile(Photo photo){
 		
 		String name = photo.getCaption();
@@ -330,6 +355,9 @@ public class search_controller {
 		return pane;
 	}
 	
+	/**
+	 * signals the program to return to the user stage
+	 */
 	public void end_search () {
 		next_scene = 3;
 		stage.close();
