@@ -185,6 +185,16 @@ public class photo_controller {
 		if (value == null)
 			return;
 		
+		if (value.equals("")) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(stage);
+			alert.setTitle("Error");
+			alert.setHeaderText("Error");
+			alert.setContentText("No tag value entered");
+			alert.showAndWait();
+			return;
+		}
+		
 		for (Tag t: activePhoto.getTags()) {
 			if (t.getValue().equals(value)) {
 				Alert alert = new Alert(AlertType.WARNING);
@@ -297,6 +307,16 @@ public class photo_controller {
 		
 		if (newValue == null)
 			return;
+		
+		if (newValue.equals("")) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(stage);
+			alert.setTitle("Error");
+			alert.setHeaderText("Error");
+			alert.setContentText("No tag value entered");
+			alert.showAndWait();
+			return;
+		}
 		
 		if (!t.getValue().equals(newValue)) {
 			for (Tag temp: activePhoto.getTags()) {
