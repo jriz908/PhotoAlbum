@@ -157,7 +157,7 @@ public class admin_controller {
 	
 	/**
 	 * Called when delete user button is pressed. If a user is selected
-	 * in the list it deletes the user object and removes it from the list.
+	 * in the list it deletes the user object and removes it from the list. Otherwise, does nothing.
 	 */
 	public void delete () {
 		
